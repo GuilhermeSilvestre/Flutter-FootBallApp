@@ -16,6 +16,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late Map<String, dynamic> jsonResult;
   List<ParseObject> results = <ParseObject>[];
+  String userEmail = '';
+  String userName = '';
+  String userTime = '';
   String name = '';
   String email = '';
   String password = '';
@@ -85,6 +88,9 @@ class _LoginScreenState extends State<LoginScreen> {
           if (jsonResult['email'] == email &&
               jsonResult['password'] == password) {
             podeEntrar = true;
+            userName = jsonResult['name'];
+            userTime = jsonResult['time'];
+            userEmail = jsonResult['email'];
             print('Bateu email e senha - Pode entrar');
           }
         }
@@ -301,10 +307,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Future.delayed(
                                       const Duration(milliseconds: 2000), () {
                                     if (podeEntrar) {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const BaseScreen()));
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                              builder: (context) => BaseScreen(
+                                                    userName: userName,
+                                                    userTime: userTime,
+                                                    userEmail: userEmail,
+                                                  )));
                                     } else {
                                       showToast(
                                           'Email ou senha inválidos - Tente novamente',
