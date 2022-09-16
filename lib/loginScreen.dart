@@ -201,6 +201,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 120,
                       height: 120,
                     ),
+                    SizedBox(
+                      height: 30,
+                    ),
                     //LOGIN
                     const Text(
                       'Entrar no aplicativo:',
@@ -275,7 +278,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               primary: Colors.green.shade600,
-                              fixedSize: const Size(200, 40),
+                              fixedSize: const Size(200, 60),
                             ),
                             onPressed: () {
                               if (!validateEmail(emaillogin)) {
@@ -437,7 +440,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               primary: Colors.yellow.shade900,
-                              fixedSize: const Size(200, 40),
+                              fixedSize: const Size(200, 60),
                             ),
                             onPressed: () {
                               if (!validateEmail(email)) {

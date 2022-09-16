@@ -25,6 +25,7 @@ dev_dependencies:
 
   flutter_lints: ^2.0.0
 
+  flutter_launcher_icons: "^0.10.0"
 
 flutter:
 
@@ -32,3 +33,9 @@ flutter:
 
   assets:
     - images/
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "images/mainIcon.png"
+  remove_alpha_ios: true

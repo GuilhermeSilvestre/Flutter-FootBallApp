@@ -78,6 +78,7 @@ class _BaseScreenState extends State<BaseScreen> {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       'Seja muito bem vindo ${widget.userName}!',
@@ -88,6 +89,7 @@ class _BaseScreenState extends State<BaseScreen> {
                     ),
                     Text(
                       'Notamos que você ainda não possui um time do coração!',
+                      textAlign: TextAlign.center,
                       style: bemVindo2,
                     ),
                     SizedBox(
@@ -129,9 +131,11 @@ class _BaseScreenState extends State<BaseScreen> {
                         fixedSize: const Size(200, 40),
                       ),
                       onPressed: () {
-                        setState(() {
-                          widget.userTime = time;
-                        });
+                        if (time != '') {
+                          setState(() {
+                            widget.userTime = time;
+                          });
+                        }
                       },
                       child: Text(
                         'Confirmar',
