@@ -140,6 +140,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(
+                      height: 15,
+                    ),
                     if (!showFixedTitle)
                       Center(
                         child: SizedBox(
