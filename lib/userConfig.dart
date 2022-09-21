@@ -102,95 +102,157 @@ class _UserConfigState extends State<UserConfig> {
         backgroundColor: Colors.green.shade400,
         title: const Text('Configurações'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Seus dados pessoais',
-                style: bemVindo,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Nome: ${widget.userName}',
-                style: bemVindo2,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Email: ${widget.userEmail}',
-                style: bemVindo2,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Time do coração: ${widget.userTime}',
-                style: bemVindo2,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Deseja alterar algum dado?',
-                style: bemVindo,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Mudar time do coração:',
-                style: alterarDados,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                width: 300,
-                child: TextField(
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(20),
-                    FilteringTextInputFormatter(
-                      RegExp("[A-Za-z0-9 ]"),
-                      allow: true,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Seus dados pessoais',
+                  style: bemVindo,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Nome: ${widget.userName}',
+                  style: bemVindo2,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Email: ${widget.userEmail}',
+                  style: bemVindo2,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Time do coração: ${widget.userTime}',
+                  style: bemVindo2,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Deseja alterar algum dado?',
+                  style: bemVindo,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Mudar time do coração:',
+                  style: alterarDados,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  width: 300,
+                  child: TextField(
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(20),
+                      FilteringTextInputFormatter(
+                        RegExp("[A-Za-z0-9 ]"),
+                        allow: true,
+                      ),
+                      FilteringTextInputFormatter.deny(RegExp('[]')),
+                    ],
+                    onChanged: (texto) {
+                      newTime = texto;
+                    },
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Digite o novo time do coração',
                     ),
-                    FilteringTextInputFormatter.deny(RegExp('[]')),
-                  ],
-                  onChanged: (texto) {
-                    newTime = texto;
-                  },
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Digite o novo time do coração',
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green.shade600,
-                  fixedSize: const Size(200, 40),
+                SizedBox(
+                  height: 10,
                 ),
-                onPressed: () {
-                  if (newTime != '') {
-                    findEmail(widget.userEmail, 'time');
-                    Timer(Duration(seconds: 1), () {
-                      registerData(id, newTime, 'time');
-                    });
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green.shade600,
+                    fixedSize: const Size(200, 40),
+                  ),
+                  onPressed: () {
+                    if (newTime != '') {
+                      findEmail(widget.userEmail, 'time');
+                      Timer(Duration(seconds: 1), () {
+                        registerData(id, newTime, 'time');
+                      });
+                      Timer(Duration(seconds: 2), () {
+                        if (success) widget.userTime = newTime;
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => BaseScreen(
+                                    userName: widget.userName,
+                                    userTime: widget.userTime,
+                                    userEmail: widget.userEmail)));
+                      });
+                    }
+                  },
+                  child: Text(
+                    'Alterar time',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  'Mudar senha:',
+                  style: alterarDados,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  width: 300,
+                  child: TextField(
+                    obscureText: true,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(20),
+                      FilteringTextInputFormatter(
+                        RegExp("[A-Za-z0-9 ]"),
+                        allow: true,
+                      ),
+                      FilteringTextInputFormatter.deny(RegExp('[]')),
+                    ],
+                    onChanged: (texto) {
+                      newSenha = texto;
+                    },
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Digite a nova senha',
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green.shade600,
+                    fixedSize: const Size(200, 40),
+                  ),
+                  onPressed: () {
+                    findEmail(widget.userEmail, 'senha');
                     Timer(Duration(seconds: 2), () {
-                      if (success) widget.userTime = newTime;
+                      registerData(id, newSenha, 'senha');
+
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -199,76 +261,16 @@ class _UserConfigState extends State<UserConfig> {
                                   userTime: widget.userTime,
                                   userEmail: widget.userEmail)));
                     });
-                  }
-                },
-                child: Text(
-                  'Alterar time',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Text(
-                'Mudar senha:',
-                style: alterarDados,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                width: 300,
-                child: TextField(
-                  obscureText: true,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(20),
-                    FilteringTextInputFormatter(
-                      RegExp("[A-Za-z0-9 ]"),
-                      allow: true,
-                    ),
-                    FilteringTextInputFormatter.deny(RegExp('[]')),
-                  ],
-                  onChanged: (texto) {
-                    newSenha = texto;
                   },
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Digite a nova senha',
+                  child: Text(
+                    'Alterar senha',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green.shade600,
-                  fixedSize: const Size(200, 40),
-                ),
-                onPressed: () {
-                  findEmail(widget.userEmail, 'senha');
-                  Timer(Duration(seconds: 2), () {
-                    registerData(id, newSenha, 'senha');
-
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => BaseScreen(
-                                userName: widget.userName,
-                                userTime: widget.userTime,
-                                userEmail: widget.userEmail)));
-                  });
-                },
-                child: Text(
-                  'Alterar senha',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
